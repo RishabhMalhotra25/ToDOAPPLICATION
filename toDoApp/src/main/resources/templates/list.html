@@ -1,0 +1,83 @@
+<div class="generic-container">
+   <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">ToDo  </span></div>
+		<div class="panel-body">
+	        <div class="formcontainer">
+	            <div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
+	            <div class="alert alert-danger" role="alert" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
+	            <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+	                
+	                 <div class="row">
+	                    <div class="form-group col-md-12">
+	                        <label class="col-md-2 control-lable" for="id">Id</label>
+	                        <div class="col-md-7">
+	                            <input type="text" ng-model="ctrl.toDo.id" id="id" class="toDoname form-control input-sm" placeholder="Enter your ToDo Id" required="true"/>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="form-group col-md-12">
+	                        <label class="col-md-2 control-lable" for="title">Title</label>
+	                        <div class="col-md-7">
+	                            <input type="text" ng-model="ctrl.toDo.title" id="title" class="toDoname form-control input-sm" placeholder="Enter your ToDo Title" required="true"/>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="row">
+	                    <div class="form-group col-md-12">
+	                        <label class="col-md-2 control-lable" for="completed">ToDO Status</label>
+	                        <div class="col-md-7">
+	                        <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.toDo.completed" >
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+	                            <!-- <input type="text" ng-model="ctrl.toDo.completed" id="completed" class="form-control input-sm" placeholder="Enter your ToDo Status." required="true" /> -->
+	                        </div>
+	                    </div>
+	                </div>
+	
+	               
+
+	                <div class="row">
+	                    <div class="form-actions floatRight">
+	                        <input type="submit"  value="Add" class="btn btn-primary btn-sm" />
+	                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Reset Form</button>
+	                    </div>
+	                </div>
+	            </form>
+    	    </div>
+		</div>	
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of ToDos (Red : In Progress , Green : Completed)</span></div>
+		<div class="panel-body">
+			<div class="table-responsive">
+		        <table class="table table-hover">
+		            <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>TITLE</th>
+		                <th>TODO STATUS</th>
+		                <th>CREATED DATE</th>
+		                <th width="100"></th>
+		                <th width="100"></th>
+		            </tr>
+		            </thead>
+		            <tbody>
+		            <tr ng-class="{'alert-success':u.completed== 'Completed' ,'alert-danger':u.completed != 'Completed'}" ng-repeat="u in ctrl.getAllToDos()">
+		                <td>{{u.id}}</td>
+		                <td>{{u.title}}</td>
+		                <td>{{u.completed}}</td>
+		                <td>{{u.createdDate |date : "dd-MM-yyyy"}}</td>
+		                 <td><button type="button" ng-click="ctrl.updateToDo(u.id)" class="btn btn-success custom-width">Update</button></td>
+		                <td><button type="button" ng-click="ctrl.removeToDo(u.id)" class="btn btn-danger custom-width">Remove</button></td>
+		            </tr>
+		            </tbody>
+		        </table>		
+			</div>
+		</div>
+    </div>
+</div>
